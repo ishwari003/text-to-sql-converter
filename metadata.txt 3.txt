@@ -1,0 +1,307 @@
+## Data description: The database contains information about the sales and inventory of a pharmaceutical company.This data containes sales of medicines and its forecasted sales over various parameters.
+
+
+## Schema Name: adpharma 
+ 
+1. table_name: adpharma.PCS,
+	- column name : FiscalYearPeriod,
+			-- type : "DATE",
+			-- Description: This column records the date corresponding to a specific fiscal year and period. It serves as a key time reference, ensuring all recorded data aligns accurately within the financial calendar of the company.
+
+	- column name : ActBudFxYTD_CURR_COGS,
+			-- type : "FLOAT",
+			-- description : "The `ActBudFxYTD_CURR_COGS` column in the PCS table represents the year-to-date (YTD) actual, budgeted, or forecasted cost of goods sold (COGS) in the current fiscal year. This value is stored as a floating-point number and may be empty (nullable), indicating that there could be no data available for a particular period or it hasn't been recorded yet.
+	
+	-column name : ActualQuantityYTD,
+			-- type : "FLOAT",			
+			-- description : This column represents the actual quantity of medicines sold year-to-date. The data is stored as a floating-point number, ensuring precision in capturing the quantity sold over the fiscal year up to the current date. As this field is not nullable, it must contain a valid number for each record, ensuring that there's always a recorded value for the quantity of the medicines sold. This metric is crucial for tracking sales performance and inventory management.
+	
+	- column name : Mappping_Columnn,
+			-- type : "NVARCHAR(50),
+			-- description: This column is used as a key to map and associate records between the 'PCS' table and potentially other tables within the database. It ensures the coherence of the data by maintaining consistency between various datasets. It is stored as a string with a maximum length of 50 characters and is case-insensitive due to its collation setting (\"SQL_Latin1_General_CP1_CI_AS\"). As it is not nullable, this column must have a valid entry for each record, ensuring its critical role in maintaining relational integrity within the database.
+		
+	"index_keys" : [ ],
+	"primary_key" : {
+		"name" : null,
+		"constrained_columns" : [ ]
+	"foreign_keys" : [ ],
+	Table_description : The adpharma.PCS tables contains detailed data related to the sales and inventory of pharmaceutical products within specific fiscal periods. This table primarily focuses on tracking the cost of goods sold (COGS) and the actual quantities of sales year-to-date (YTD) for various medicines. Each record is associated with a particular fiscal period and a specific mapping identifier that conveys additional information.The PCS table is an integral part of the pharmaceutical company's database, allowing for comprehensive analysis and reporting of sales performance and inventory status over time.
+
+2. table_name: adpharma.PCS Latest Price
+
+column name: Concat_Column
+-- type: "NVARCHAR(50)       
+-- description: The Concat_Column in the PCS Latest Price table is a non-nullable, case-insensitive text field with a maximum length of 50 characters. This column is likely used to store a concatenated string (combination of multiple data elements) that serves as a unique identifier or key for each record in the table.
+
+column name: LatestPerUnitCost
+-- type: "FLOAT"
+-- description: The LatestPerUnitCost column stores the most recent per-unit cost of various pharmaceutical products. The data type for this column is FLOAT, ensuring accuracy in representing the latest costs, which may include decimal values. The "not nullable" constraint indicates that each record must contain a value in this column, ensuring that there is always accurate and up-to-date cost information available for each product.
+
+index_keys: []
+
+primary_key:
+-- name: null
+-- constrained_columns: []
+
+foreign_keys: []
+
+table_description: The "PCS Latest Price" table contains information about the most recent cost per unit for various pharmaceutical products in the company's inventory. Each record associates a unique identifier with its corresponding latest per-unit cost.
+
+3. table_name: adpharma.Revenue Actual
+
+column name: FiscalYearPeriod
+-- type: "DATE"
+-- description: The FiscalYearPeriod column in the Revenue Actual table contains the date of the fiscal year period for which the revenue data is recorded. This column is mandatory and ensures that each entry is associated with a specific fiscal period, facilitating accurate reporting and analysis of financial performance over time.
+
+column name: ActBudFxYTD_CURR_Revenue
+-- type: "FLOAT"
+-- description: This column represents the current fiscal year's year-to-date (YTD) actual budgeted revenue. It tracks the actual revenue generated so far in the current fiscal year compared to the budgeted amount. The value is stored as a floating-point number and is a required field, meaning that every record in the Revenue Actual table must have a value for this column.
+
+column name: ActualQuantityYTD
+-- type: "FLOAT"
+-- description: This column represents the actual quantity of pharmaceutical products sold year-to-date (YTD) within the company's fiscal year. The values are stored as floating-point numbers, ensuring they can accommodate both whole units and fractions. Since this data is crucial for tracking sales performance, it is not nullable, meaning every entry in the 'Revenue Actual' table must contain an actual quantity sold value for accurate sales reporting and analysis.
+
+column name: Mappping_Columnn
+-- type: "NVARCHAR(50) 
+-- description: The Mappping_Columnn in the Revenue Actual table is a non-nullable text field (up to 50 characters) that likely serves to link or reference data across different tables or systems by providing a common identifier. This could be used for mapping various records to ensure consistency and integrity in the database.
+
+index_keys: []
+
+primary_key:
+-- name: null
+-- constrained_columns: []
+
+foreign_keys: []
+
+table_description:
+The "adpharma.Revenue Actual" table stores comprehensive data related to the actual revenue performance of the pharmaceutical company's products over various fiscal periods. This table provides key metrics that help assess and analyze the company’s financial performance by tracking the actual revenue, quantities sold, and correlating these metrics with specific mappings, presumably linked to products and regions.
+
+4. table_name: adpharma.RF  
+  
+columns:  
+  - column name: Business  
+    -- type: NVARCHAR COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The "Business" column in the "adpharma.RF" table is a non-nullable text field that categorizes the pharmaceutical company's operations into different business units or divisions. This ensures that each entry is associated with a specific business area, helping to organize and segment the data for better analysis and reporting.  
+  
+  - column name: Region  
+    -- type: NVARCHAR(50) COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The "Region" column in the "adpharma.RF" table stores the geographical regions corresponding to the sales data. This is a string value with a maximum length of 50 characters and follows the case-insensitive collation "SQL_Latin1_General_CP1_CI_AS." This column is mandatory and cannot contain NULL values.  
+  
+  - column name: Area  
+    -- type: NVARCHAR(50) COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The "Area" column represents the specific geographical region or territory where sales activities are conducted. This field is crucial for categorizing data by different zones, helping to analyze and compare sales performance across diverse locations. It is a mandatory field that accommodates text data up to 50 characters in length.  
+  
+  - column name: Country  
+    -- type: NVARCHAR(50) COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The "Country" column  holds the name of the country. It is a text field with a maximum length of 50 characters and follows the "SQL_Latin1_General_CP1_CI_AS" collation, ensuring case-insensitive, accent-sensitive string comparison. This column is mandatory and cannot contain null values.  
+  
+  - column name: SAP_SKU_Code  
+    -- type: NVARCHAR COLLATE 
+    -- description: The **SAP_SKU_Code** column contains unique alphanumeric codes that serve as Stock Keeping Units (SKUs) within the SAP system. These codes are used to identify and track specific pharmaceutical products within the company's inventory and throughout the sales process.  
+  
+  - column name: Class  
+    -- type: NVARCHAR(50) 
+    -- description: The "Class"  stores descriptive classification information for each pharmaceutical product.The values in this column are used to categorize and organize products in the inventory for more efficient data management and analysis. Whether value is actual(RF12), yearly budgeted(Budget01) or quaterly budgeted(f3).
+			RF1 means actual till jan and rest is forecasted.
+  
+  - column name: Attribute  
+    -- type: NVARCHAR(50)
+    -- description: The 'Attribute' column  holds categorical data that describe specific characteristics or qualities related to the pharmaceuticals or business units. ensuring that each record provides essential details that help in classifying and analyzing the products or entities within the database.  
+  
+  - column name: Total_Value  
+    -- type: FLOAT  
+    -- description: The column represents the total monetary value of pharmaceutical sales or inventory, expressed as a floating-point number. This value is essential for assessing the financial performance and inventory worth of the company's products across various regions, countries, or other specified categories. The column is mandatory, ensuring that each record contains this value for accurate analysis and reporting."
+		
+
+  - column_name: Total_Volume  
+    -- type: FLOAT  
+    -- description: The `Total_Volume` column records the overall quantity of pharmaceutical products. This measurement captures the aggregate volume of units sold or available, depending on the context, and is never left empty (non-nullable). This data is vital for assessing production, inventory levels, and sales trends."  
+  
+  - column_name: Head  
+    -- type: NVARCHAR(50) COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The "Head" contains information about the head or lead responsible for the specific business, region, area, etc. This field can occasionally be left empty (nullable), meaning that in some records, the information may not be provided. The column data is stored as a string (up to 50 characters) and is case-insensitive due to the specified collation "SQL_Latin1_General_CP1_CI_AS".  
+  
+  - column_name: Revised_Class  
+    -- type: NVARCHAR(50) COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The "Revised_Class" contains classification information for products that has been updated or revised. This data is stored as a 50-character string and must always have a value, indicating its importance in categorizing or reclassifying product entries.  
+  
+  - column_name: Description  
+    -- type: NVARCHAR(50) COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The `Description` is a textual field that stores detailed information about each record. It is a mandatory field, meaning that it must contain a value for every entry. The type of this column is NVARCHAR, which allows it to store Unicode characters, making it capable of holding a wide range of textual data including alphanumeric characters. The length of the data is restricted to a maximum of 50 characters. This field is essential for providing descriptive context to each entry, facilitating better understanding and identification of the data within the `RF` table.  
+  
+  - column_name: productcode  
+    -- type: NVARCHAR COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The `productcode` is a non-nullable NVARCHAR field that stores the unique identification codes for various products. This ensures that each product within the pharmaceutical inventory can be distinctly identified and referenced, facilitating accurate tracking and management of sales and inventory data specific to each product.  
+  
+  - column_name: MoleculeForReporting  
+    -- type: NVARCHAR(50) COLLATE "SQL_Latin1_General_CP1_CI_AS"  
+    -- description: The **MoleculeForReporting** is designed to store the name or identifier of a molecule used for reporting purposes. This column ensures that each entry is consistent and easily searchable by using a standard character format and case-insensitive collation. The information in this column is crucial for tracking and analyzing data related to specific molecules within the pharmaceutical industry, such as sales performance and inventory levels. The column is mandatory, meaning it must have a value for each record in the table. It supports up to 50 characters.  
+  
+  - column_name: RF_Concat  
+    -- type: NVARCHAR(50)  
+    -- description:The `RF_Concat` column is a non-nullable NVARCHAR field with a maximum length of 50 characters. This column is used to store a concatenated string that uniquely identifies a specific record within the `RF` table. The concatenation typically involves combining multiple attributes of the pharmaceutical product, such as business, region, area, country, or any other relevant identifiers, to create a unique composite key for efficient data retrieval and analysis.\n\nBy consolidating various aspects of the product into a single string, `RF_Concat` facilitates the simplification of complex queries and enhances the integrity and accessibility of records related to sales and inventory within the pharmaceutical company's database."
+		
+- column_name: Class_RPT
+	-- type: "NVARCHAR(50) COLLATE \"SQL_Latin1_General_CP1_CI_AS\"",
+			"nullable" : false,
+			"description" :This column contains classification information at the reporting level for each pharmaceutical product. It enables categorization of products as per the reporting requirements into distinct groups or classes. The data type is a non-variable character string with a maximum length of 50 characters, ensuring that all entries are case-insensitive and comply with the \"SQL_Latin1_General_CP1_CI_AS\" collation. This column is essential for reporting and analytical purposes, aiding in the organization and analysis of products based on predefined classes.\n- **Not Nullable:** This means that every record in the table must have a value for this column, ensuring completeness and relevance of the data."
+
+- column_name: ProductCode_Country_Key,
+	-- type: "NVARCHAR(50) COLLATE \"SQL_Latin1_General_CP1_CI_AS\"",
+	-- description:This column uniquely identifies a product's code and its associated country. It combines the product code and country information into a single string value, ensuring unique identification for each product-country pair. This is essential for tracking and reporting sales and inventory data at a granular level, facilitating precise and accurate analysis. The data type is NVARCHAR, allowing for a mix of letters and numbers up to 50 characters in length, and it is not nullable, meaning every record must have a value for this column.
+	
+- column_name: Newconct,
+	-- type:"NVARCHAR(50) COLLATE \"SQL_Latin1_General_CP1_CI_AS\"",
+	-- description:"The \"Newconct\" a non-nullable text field with a maximum length of 50 characters. It is tasked with storing concatenated or combined information relevant to the data within the table, potentially serving as a unique identifier or key derived from other attributes in the same table. The character type is defined to be case-insensitive and follows the \"SQL_Latin1_General_CP1_CI_AS\" collation."
+		
+- column_name: "Start_of_Month",
+	-- type: "DATE",
+	-- description: This column represents the start date of the month for which the data is relevant. This date is crucial in time-series analyses and reporting as it designates the temporal context for the sales, inventory, and forecast metrics recorded in the database. The format is DATE, and entries for this column are required (non-nullable), ensuring that every record is associated with a specific month's beginning."
+	
+	"index_keys" : [ ],
+	"primary_key" : {
+		"name" : null,
+		"constrained_columns" : [ ]
+	},
+	"foreign_keys" : [ ],
+	
+table_description: The 'adpharma.RF' table in the pharmaceutical company's database is designed to store intricate details regarding the sales and inventory forecast across different regions and countries. The table provides an in-depth look at various attributes of the pharmaceutical products, regions, and their performance metrics. This table is central to understanding and managing the dynamic sales environment, vital for making informed decisions about product distribution, sales strategies, and inventory control within the pharmaceutical company's operational framework.",
+
+### Relation of RF table wit other table:
+1. Relation between RF and PCS:
+--Table Name: PCS
+ From: CONCATENATE(RF[ProductCode_Country_Key] , CONCATENATE(MONTH(RF[Start of Month]),YEAR(RF[Start of Month])))
+ To: UPPER(PCS[Mappping_Columnn]) & CONCATENATE(MONTH(PCS[FiscalYearPeriod]), YEAR(PCS[FiscalYearPeriod]))
+ Type: Many to One
+ Description: This relation connects the RF table to the PCS table, where a composite key made up of the ProductCode_Country_Key and 'CONCATENATE(MONTH(RF[Start of Month]),YEAR(RF[Start of Month])))' Direction in the RF table maps to the UPPER(PCS[Mappping_Columnn]) & CONCATENATE(MONTH(PCS[FiscalYearPeriod]), YEAR(PCS[FiscalYearPeriod])) in the PCS table. The relationship is characterized by a 'Many to One' cardinality, indicating that multiple records in the RF table can correspond to a single record in the PCS table. The bidirectional nature of this relationship ensures that data can be traversed and queried efficiently in both directions.
+2. Relation between RF and Revenue Actual:
+-- Table Name: Revenue Actual
+ From: UPPER(RF[ProductCode_Country_Key])&CONCATENATE(MONTH(RF[Start of Month]),YEAR(RF[Start of Month])))&RF[Class_RPT]
+ To: 'Revenue Actual'[Mappping_Columnn]&CONCATENATE(MONTH('Revenue Actual'[FiscalYearPeriod]), YEAR('Revenue Actual'[FiscalYearPeriod]))&\"RF\"
+ Type: Many to One
+ Description: This relation connects the RF table to the Revenue Actual table. The composite key in the RF table is formed by concatenating the uppercase value of ProductCode_Country_Key, CONCATENATE(MONTH(RF[Start of Month]),YEAR(RF[Start of Month]))), and Class_RPT. This composite key maps to a concatenated key in the Revenue Actual table, which appends 'RF' to the Concat Key. The 'Many to One' cardinality indicates that multiple records in the RF table can correspond to a single record in the Revenue Actual table. The bidirectional direction allows for efficient data traversal and querying in both directions.
+3. Relation between RF and PCS Latest Price:
+-- Table Name: PCS Latest Price
+ From: CONCATENATE(UPPER(RF[Country]), RF[SAP_SKU_Code])
+ To: PCS Latest Price[Concat_Column]
+ Type: Many to One
+ Direction: Single (from RF to PCS Latest Price)
+ Description: This relation connects the RF table to the PCS Latest Price table. The composite key in the RF table is formed by concatenating the uppercase value of the Country column and the SAP_SKU_Code column. This composite key maps to the Concat_Column in the PCS Latest Price table. The 'Many to One' cardinality indicates that multiple records in the RF table can correspond to a single record in the PCS Latest Price table. The direction of this relationship is single, flowing from RF to PCS Latest Price.
+
+
+## KPI - use these formulas to generate the query when required.
+
+1. KPI Name: Revenue YTD RF
+	Description: Year-to-date (YTD) revenue based on revised forecast (RF).
+	Formula: IF(Selected Metric = "Volume", Total Volume (filtered by Class and Date <= Max Revised_Class for Current Year), Total Value (filtered by Class and Date <= Max Revised_Class for Current Year))
+
+2. KPI Name: Revenue YTD Budget
+	Description: Year-to-date (YTD) revenue based on budget.
+	Formula: IF(Selected Metric = "Volume", Total Volume (filtered by Class and Date <= Max Revised_Class for Current Year), Total Value (filtered by Class and Date <= Max Revised_Class for Current Year))
+
+3. KPI Name: % Achieved YTD
+	Description: Percentage of revenue achieved YTD, comparing RF with Budget.
+	Formula: % Achieved = Revenue YTD RF / Revenue YTD Budget.  If >= 100%, show as "▲", else "▼"
+
+4. KPI Name: YTD Variance
+	Description: Difference between YTD RF revenue and YTD Budget revenue.
+	Formula: YTD Variance = Revenue YTD RF - Revenue YTD Budget
+
+5. KPI Name: Revenue FY RF
+	Description: Full-year (FY) revenue forecast (RF).
+	Formula: IF(Selected Metric = "Volume", Total Volume (filtered by Class for Current Year), Total Value (filtered by Class for Current Year))
+
+6. KPI Name: Revenue FY Budget
+	Description: Full-year (FY) budgeted revenue.
+	Formula: IF(Selected Metric = "Volume", Total Volume (filtered by Class for Current Year), Total Value (filtered by Class for Current Year))
+
+7. KPI Name: Variance Revenue FY %
+	Description: Percentage variance between FY RF and FY Budget.
+	Formula: Variance % = ROUNDUP(Revenue FY RF / Revenue FY Budget, 1). If >= 100%, show as "▲", else "▼"
+
+8. KPI Name: FY Variance
+	Description: Absolute difference between FY RF revenue and FY Budget revenue.
+	Formula: FY Variance = Revenue FY RF - Revenue FY Budget
+
+9. KPI Name: GC YTD S1
+Description: Year-to-date (YTD) gross contribution for Selection 1.
+Formula: CALCULATE(  
+    [Gross Contribution],  
+    RF[Class] = SELECTEDVALUE('Selection 1'[Class]),  
+    FILTER(  
+        ALL('Date'),  
+        'Date'[Date] <= MAX(RF[Actual Date])   &&   
+        'Date'[Year] = SELECTEDVALUE('Date'[Year])  
+    ) 
+
+ 
+10. KPI Name: Gross Contribution
+	Description: Gross contribution calculation.
+	Formula: [Total Value] + [Calculate Total COS]  
+ 
+11. KPI Name: Total Value
+	Description: Sum of actual revenue.
+	Formula: SUM(RF[Actual Revenue])  
+ 
+12. KPI Name: Total COS
+	Description: Calculation of total cost of sales (COS).
+	Formula: CALCULATE( SUM(RF[Actual COS]), RF[Start of Month] <= MAX(RF[Actual Date]) ), _forecast_cos = CALCULATE(  
+    SUM(RF[COS Forecast]),  
+    RF[Start of Month] > MAX(RF[Actual Date])  
+)  ,  _actual = CALCULATE(  
+    SUM(RF[Actual COS])
+
+13. KPI Name: COS Forecast
+	Description: Forecasted cost of sales based on total volume and per unit cost.
+	Formula: RF[TOTAL_VOLUME] * RF[Per Unit]  
+ 
+14. KPI Name: Actual COS
+	Description: Actual cost of sales based on certain conditions.
+	Formula:IF( (RF[Start of Month] <= RF[Revised_Class]) && RF[Class_RPT] = "RF", RELATED(PCS[ActBudFxYTD_CURR_COGS]), RF[COS Forecast] 
+
+ 
+15. KPI Name: GC YTD S2
+	Description: Year-to-date (YTD) gross contribution for Selection 2.
+	Formula:CALCULATE( [Gross Contribution], RF[Class] = SELECTEDVALUE('Selection 2'[Class]), FILTER( ALL('Date'), 'Date'[Date] <= MAX(RF[Actual Date]) && 'Date'[Year] = SELECTEDVALUE('Date'[Year])
+ 
+16. KPI Name: GC Var YTD
+	Description: Year-to-date (YTD) variance in gross contribution between Selection 1 and Selection 2.
+	Formula:[GC YTD S1] - [GC YTD S2] 
+
+17. KPI Name: GC FY S1
+	Description: Full-year (FY) gross contribution for Selection 1.
+	Formula:CALCULATE( [Gross Contribution], RF[Class] = SELECTEDVALUE('Selection 1'[Class]), FILTER( ALL('Date'), 'Date'[Year] = SELECTEDVALUE('Date'[Year])  
+
+ 
+18. KPI Name: GC FY S2
+	Description: Full-year (FY) gross contribution for Selection 2.
+	Formula:CALCULATE( [Gross Contribution], RF[Class] = SELECTEDVALUE('Selection 2'[Class]), FILTER( ALL('Date'), 'Date'[Year] = SELECTEDVALUE('Date'[Year]) ) )
+
+19. KPI Name: GC Var FY
+	Description: Full-year (FY) variance in gross contribution between Selection 1 and Selection 2.
+	Formula:[GC FY S1] - [GC FY S2]
+
+20. KPI Name: Total GC % Acc Selection 1
+	Description: Total gross contribution percentage accumulation for Selection 1.
+	Formula: DIVIDE([Total GC Acc Selection 1], [Total Revenue Acc Selection 1], 0)
+
+21. KPI Name: Total COS Acc Selection 1
+	Description: Total cost of sales (COS) accumulation for Selection 1.
+	Formula:CALCULATE( [Total COS], RF[Class] = SELECTEDVALUE('Selection 1'[Class]) )
+
+22. KPI Name: Total COS
+	Description: Total cost of sales (COS).
+	Formula:CALCULATE(SUM(RF[Actual COS]))
+
+23. KPI Name: Total GC Acc Selection 1
+	Description: Total gross contribution accumulation for Selection 1.
+	Formula: [Total Revenue Acc Selection 1] - [Total COS Acc Selection 1]
+
+
+24. KPI Name: Revenue YTD S1
+	Description: Year-to-date (YTD) revenue for Selection 1.
+	Formula: IF( SELECTEDVALUE('Date'[Year]) = "Volume", CALCULATE( [Total Volume], RF[Class] = SELECTEDVALUE('Selection 1'[Class]), FILTER( ALL('Date'), 'Date'[Date] <= MAX(RF[Revised_Class]) && 'Date'[Year] = _year ) ), CALCULATE( [Total Value], RF[Class] = SELECTEDVALUE('Selection 1'[Class]), FILTER( ALL('Date'), 'Date'[Date] <= MAX(RF[Revised_Class]) && 'Date'[Year] = SELECTEDVALUE('Date'[Year])) ) )
+
+25. KPI Name: COS YTD S1
+	Description: Year-to-date (YTD) cost of sales (COS) for Selection 1.
+	Formula: CALCULATE( [Total COS], RF[Class] = SELECTEDVALUE('Selection 1'[Class]), FILTER( ALL('Date'), 'Date'[Date] <= MAX(RF[Actual Date])&& 'Date'[Year] = SELECTEDVALUE('Date'[Year])) ) 
